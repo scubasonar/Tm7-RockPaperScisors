@@ -13,7 +13,7 @@
       <h1 class="text-center">Welcome to Rock, Paper, Scissors!</h1>
       <h2 class="text-center">Start a new game below.</h2>
       <div class="form-actions">
-      <form action="#">
+      <form method="post" action="RPSGame">
          <button type="submit" class="btn btn-default">New Game</button>
       </form>
       </div>
