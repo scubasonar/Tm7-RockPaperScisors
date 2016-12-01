@@ -14,22 +14,31 @@
    <div class="row">
       <div class="col-md-4">
          <img class="img-responsive" src="images/rock_01.png">
-         <form method="post" action="RPSGame">
-         <button type="submit" value="Rock" name="value" class="btn btn-default">Rock</button>
-         </form>
       </div>
       <div class="col-md-4">
          <img class="img-responsive" src="images/paper_01.png">
-         <form method="post" action="RPSGame">
-         <button type="submit" value="Paper" name="value" class="btn btn-default">Paper</button>
-         </form>
       </div>
       <div class="col-md-4">
          <img class="img-responsive" src="images/scissors_01.png">
-         <form method="post" action="RPSGame">
-         <button type="submit" value="Scissors" name="value" class="btn btn-default">Scissors</button>
-         </form>
       </div>
    </div>
+   <div class="row">
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4">
+         <h2>You won that round!</h2>
+         <h3>You chose <% out.println(request.getAttribute("player")); %></h3>
+         <h3>The computer chose <% out.println(request.getAttribute("computer")); %></h3>
+         
+      </div>
+      <div class="col-md-4">
+      </div>
+   </div>
+   <div class="row">
+      <form method="post" action="RPSGame">
+         <button type="submit" value="Next" name="next" class="btn btn-default">Next Round</button>
+      </form>
+   </div>
+
 </body>
 </html>

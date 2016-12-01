@@ -1,6 +1,8 @@
 package cst438;
 
 import java.io.IOException;
+import java.util.Random;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +14,6 @@ import javax.servlet.http.HttpSession;
  */
 public class RPSGame extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public enum Value {Rock, Paper, Scissors}
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -53,8 +54,111 @@ public class RPSGame extends HttpServlet {
 			return;
 		}
 		
-		request.getRequestDispatcher("rpsStart.jsp").forward(request, response);
+		String value = request.getParameter("value");
+		if (value != null)
+		{
+			String computerSelection = generateComputerPick();
+			int turnResult = 0;
+			request.setAttribute("computer", computerSelection);
+			request.setAttribute("player", value);
+
+			turnResult = playTurn(value, computerSelection);
+			
+			
+			if (turnResult == 0)
+			{
+				request.getRequestDispatcher("rpsLose.jsp").forward(request, response);
+			}
+			else if (turnResult == 1)
+			{
+				request.getRequestDispatcher("rpsTie.jsp").forward(request, response);
+			}
+			else
+			{
+				request.getRequestDispatcher("rpsWin.jsp").forward(request, response);
+			}
+		}
+		else
+		{
+			request.getRequestDispatcher("rpsStart.jsp").forward(request, response);
+		}
 		
+	}
+	
+	/**
+	 * Simulates one turn of Rock, Paper, Scissors. Selects a random choice
+	 * for the computer controlled player.
+	 * @param value An enum of type Value, with possible values of: Rock, Paper
+	 * or Scissors
+	 * @param computerSelection An enum of type Value, with possible values of: Rock, Paper
+	 * or Scissors
+	 * @return Returns 0 for a loss, 1 for a tie, and 2 for a win
+	 */
+	public static int playTurn(String value, String computerSelection)
+	{
+		int playerWon = 0;
+		
+		if (value.equals(computerSelection))
+		{
+			playerWon = 1;
+		}
+		else if (value.equals("Rock"))
+		{
+			if (computerSelection.equals("Paper"))
+			{
+				playerWon = 0;
+			}
+			else
+			{
+				playerWon = 2;
+			}
+		}
+		else if (value.equals("Paper"))
+		{
+			if (computerSelection.equals("Scissors"))
+			{
+				playerWon = 0;
+			}
+			else
+			{
+				playerWon = 2;
+			}
+		}
+		else
+		{
+			if (computerSelection.equals("Rock"))
+			{
+				playerWon = 0;
+			}
+			else
+			{
+				playerWon = 2;
+			}
+		}
+		
+		return playerWon;
+	}
+	
+	static Random randomGenerator = new Random();
+	
+	private static String generateComputerPick()
+	{
+		int num = randomGenerator.nextInt(3);
+		String result = null;
+		
+		switch (num)
+		{
+		case 0:
+			result = "Rock";
+			break;
+		case 1:
+			result = "Paper";
+			break;
+		case 2:
+			result = "Scissors";
+			break;
+		}
+		return result;
 	}
 
 }
@@ -66,23 +170,11 @@ class Player
 {
 	private int won;
 	private int lost;
-	private RPSGame.Value value;
 	
 	public Player()
 	{
 		setWon(0);
 		setLost(0);
-		setValue(null);
-	}
-	
-	public RPSGame.Value getValue()
-	{
-		return value;
-	}
-	
-	public void setValue(RPSGame.Value value)
-	{
-		this.value = value;
 	}
 	
 	public int getLost()
