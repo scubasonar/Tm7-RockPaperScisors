@@ -5,6 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class RPSGame
@@ -33,8 +34,27 @@ public class RPSGame extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		// Create new session or retrieve previous session
+		HttpSession session = request.getSession(true);
+		Player player = (Player) session.getAttribute("player");
+		
+		if (player == null)
+		{
+			player = new Player();
+		}
+		session.setAttribute("player", player);
+		
+		String newGame = request.getParameter("newGame");
+		if (newGame != null)
+		{
+			session.invalidate();
+			player = null;
+			response.sendRedirect("index.jsp");
+			return;
+		}
+		
+		request.getRequestDispatcher("rpsStart.jsp").forward(request, response);
+		
 	}
 
 }
@@ -52,7 +72,7 @@ class Player
 	{
 		setWon(0);
 		setLost(0);
-		setValue(RPSGame.Value.Rock);
+		setValue(null);
 	}
 	
 	public RPSGame.Value getValue()

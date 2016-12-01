@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -9,13 +11,15 @@
    <title>Rock, Paper, Scissors</title>
 </head>
 <body>
-   <div class="container">
-      <h1 class="text-center">Welcome to Rock, Paper, Scissors!</h1>
-      <h2 class="text-center">Start a new game below.</h2>
-      <div class="form-actions">
-      <form method="post" action="RPSGame">
-         <button type="submit" value="New Game" class="btn btn-default">New Game</button>
-      </form>
+   <div class="row">
+      <div class="col-md-4">
+         <img class="img-responsive" src="images/rock_01.png">
+      </div>
+      <div class="col-md-4">
+         <img class="img-responsive" src="images/paper_01.png">
+      </div>
+      <div class="col-md-4">
+         <img class="img-responsive" src="images/scissors_01.png">
       </div>
    </div>
 </body>
