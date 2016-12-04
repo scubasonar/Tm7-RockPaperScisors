@@ -1,0 +1,16 @@
+body {
+	width: 75%;
+	background-color: #cff09e;
+	margin: auto;
+}
+
+#startBox {
+	border: 5px solid #0b486b;
+	border-radius: 20px;
+	background-color: #a8bda8;
+	margin-top: 1em;
+}
+
+#newGameBtn {
+	margin: 1em;
+}
