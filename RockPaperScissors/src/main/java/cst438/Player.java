@@ -1,5 +1,7 @@
 package cst438;
 
+import java.util.HashMap;
+
 /**
  * Player class to track player info during a session
  */
@@ -7,30 +9,25 @@ class Player
 {
 	private int totalWon;
 	private int totalLost;
-	private int rockCounter;
-	private int paperCounter;
-	private int scissorsCounter;
-	private int rockWins;
-	private int rockLosses;
-	private int paperWins;
+	private int totalDraws;
 	
 	public Player()
 	{
-		setWon(0);
-		setLost(0);
+		setTotalLost(0);
+		setTotalWon(0);
 	}
 	
-	public int getLost()
+	public int getTotalLost()
 	{
 		return totalLost;
 	}
 	
-	public void incrementLost()
+	public void incrementTotalLost()
 	{
 		totalLost++;
 	}
 	
-	public void setLost(int lost)
+	public void setTotalLost(int lost)
 	{
 		if (lost < 0)
 		{
@@ -40,17 +37,17 @@ class Player
 		totalLost = lost;
 	}
 	
-	public int getWon()
+	public int getTotalWon()
 	{
 		return totalWon;
 	}
 	
-	public void incrementWon()
+	public void incrementTotalWon()
 	{
 		totalWon++;
 	}
 	
-	public void setWon(int won)
+	public void setTotalWon(int won)
 	{
 		if (won < 0)
 		{
@@ -59,4 +56,25 @@ class Player
 		
 		totalWon = won;
 	}
+	
+	public int getTotalDraws()
+	{
+		return totalDraws;
+	}
+	
+	public void incrementTotalDraws()
+	{
+		totalDraws++;
+	}
+	
+	public void setTotalDraws(int draw)
+	{
+		if (draw < 0)
+		{
+			return;
+		}
+		
+		totalDraws = draw;
+	}
+
 }
