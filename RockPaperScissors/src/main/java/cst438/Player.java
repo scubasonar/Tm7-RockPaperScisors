@@ -1,6 +1,5 @@
 package cst438;
 
-import java.util.HashMap;
 
 /**
  * Player class to track player info during a session
