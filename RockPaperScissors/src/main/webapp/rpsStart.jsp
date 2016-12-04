@@ -31,5 +31,13 @@
          </form>
       </div>
    </div>
+   <div class="row">
+      <h2>Session Stats</h2>
+      <div class="col-md-3">
+         <p>Total Wins: <% out.println(request.getAttribute("totalWon")); %> </p>
+         <p>Total Losses: <% out.println(request.getAttribute("totalLost")); %> </p>
+         <p>Total Draws: <% out.println(request.getAttribute("totalDraw")); %> </p>
+      </div>
+   </div>
 </body>
 </html>

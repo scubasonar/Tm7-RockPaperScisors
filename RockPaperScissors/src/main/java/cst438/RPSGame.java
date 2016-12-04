@@ -54,6 +54,10 @@ public class RPSGame extends HttpServlet {
 			return;
 		}
 		
+		request.setAttribute("totalWon", player.getTotalWon());
+		request.setAttribute("totalLost", player.getTotalLost());
+		request.setAttribute("totalDraw", player.getTotalDraws());
+		
 		String value = request.getParameter("value");
 		if (value != null)
 		{
@@ -62,7 +66,7 @@ public class RPSGame extends HttpServlet {
 			request.setAttribute("computer", computerSelection);
 			request.setAttribute("player", value);
 
-			turnResult = playTurn(value, computerSelection);
+			turnResult = playTurn(value, computerSelection, player);
 			
 			
 			if (turnResult == 0)
@@ -92,25 +96,29 @@ public class RPSGame extends HttpServlet {
 	 * or Scissors
 	 * @param computerSelection An enum of type Value, with possible values of: Rock, Paper
 	 * or Scissors
+	 * @param player An object of type Player that holds the stats for the current session
 	 * @return Returns 0 for a loss, 1 for a tie, and 2 for a win
 	 */
-	public static int playTurn(String value, String computerSelection)
+	public static int playTurn(String value, String computerSelection, Player player)
 	{
 		int playerWon = 0;
 		
 		if (value.equals(computerSelection))
 		{
 			playerWon = 1;
+			player.incrementTotalDraws();
 		}
 		else if (value.equals("Rock"))
 		{
 			if (computerSelection.equals("Paper"))
 			{
 				playerWon = 0;
+				player.incrementTotalLost();
 			}
 			else
 			{
 				playerWon = 2;
+				player.incrementTotalWon();
 			}
 		}
 		else if (value.equals("Paper"))
@@ -118,10 +126,12 @@ public class RPSGame extends HttpServlet {
 			if (computerSelection.equals("Scissors"))
 			{
 				playerWon = 0;
+				player.incrementTotalLost();
 			}
 			else
 			{
 				playerWon = 2;
+				player.incrementTotalWon();
 			}
 		}
 		else
@@ -129,10 +139,12 @@ public class RPSGame extends HttpServlet {
 			if (computerSelection.equals("Rock"))
 			{
 				playerWon = 0;
+				player.incrementTotalLost();
 			}
 			else
 			{
 				playerWon = 2;
+				player.incrementTotalWon();
 			}
 		}
 		
