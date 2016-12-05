@@ -14,7 +14,8 @@ import javax.servlet.http.HttpSession;
  */
 public class RPSGame extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	//String buildVersion = RPSGame.class.getPackage().getImplementationVersion(); // isn't working
+	static final String buildVersion = "12/4/16 10pm";  // change if you recompile
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -38,7 +39,7 @@ public class RPSGame extends HttpServlet {
 		// Create new session or retrieve previous session
 		HttpSession session = request.getSession(true);
 		Player player = (Player) session.getAttribute("player");
-		
+		request.setAttribute("buildVersion", buildVersion);
 		if (player == null)
 		{
 			player = new Player();

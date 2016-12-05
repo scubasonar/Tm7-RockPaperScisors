@@ -38,6 +38,7 @@
          <p>Total Wins: <% out.println(request.getAttribute("totalWon")); %> </p>
          <p>Total Losses: <% out.println(request.getAttribute("totalLost")); %> </p>
          <p>Total Draws: <% out.println(request.getAttribute("totalDraw")); %> </p>
+         <p>Build Version: <% out.println(request.getAttribute("buildVersion")); %> </p>
       </div>
    </div>
 </body>
