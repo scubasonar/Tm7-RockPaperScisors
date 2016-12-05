@@ -15,8 +15,14 @@
       <div id="startBox">
          <h1 class="text-center">Welcome to Rock, Paper, Scissors!</h1>
          <h2 class="text-center">Start a new game below.</h2>
+         <div class="row">
+         <h3 class="text-center">Enter your email to track your stats:</h3>
+         <div class="col-md-offset-5 col-md-2">
+             <input type="email" class="form-control" id="playerEmail" placeholder="Email"> 
+         </div>
+         </div>
          <div class="row form-actions">
-            <div class="col-md-offset-5 col-md-2">
+            <div class="col-md-offset-5 col-md-4">
                <form method="post" action="RPSGame">
                   <button id="newGameBtn" type="submit" value="New Game" class="btn btn-default">New Game</button>
                </form>
