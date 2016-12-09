@@ -10,10 +10,27 @@ class Player
 	private int totalLost;
 	private int totalDraws;
 	
+	private String emailAddress;
+	
 	public Player()
 	{
 		setTotalLost(0);
 		setTotalWon(0);
+	}
+	
+	public String getEmailAddress()
+	{
+		return emailAddress;
+	}
+	
+	public void setEmailAddress(String email)
+	{
+		if (email == null)
+		{
+			return;
+		}
+		
+		emailAddress = email;
 	}
 	
 	public int getTotalLost()
