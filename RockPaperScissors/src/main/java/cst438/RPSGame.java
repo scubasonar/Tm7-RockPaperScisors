@@ -1,6 +1,9 @@
 package cst438;
 
 import java.io.IOException;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
 import java.util.Random;
 
 import javax.servlet.ServletException;
@@ -8,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.mysql.jdbc.Connection;
 
 /**
  * Servlet implementation class RPSGame
@@ -40,9 +45,13 @@ public class RPSGame extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Player player = (Player) session.getAttribute("player");
 		request.setAttribute("buildVersion", buildVersion);
+		String email = null;
+		
 		if (player == null)
 		{
 			player = new Player();
+			email = request.getParameter("email");
+			
 		}
 		session.setAttribute("player", player);
 		
@@ -58,6 +67,8 @@ public class RPSGame extends HttpServlet {
 		request.setAttribute("totalWon", player.getTotalWon());
 		request.setAttribute("totalLost", player.getTotalLost());
 		request.setAttribute("totalDraw", player.getTotalDraws());
+		// TODO: remove the below line before submitting
+		request.setAttribute("email", email);
 		
 		String value = request.getParameter("value");
 		if (value != null)
@@ -88,6 +99,19 @@ public class RPSGame extends HttpServlet {
 			request.getRequestDispatcher("rpsStart.jsp").forward(request, response);
 		}
 		
+	}
+	
+	
+	public Connection getConnection() throws SQLException {
+
+	    Connection conn = null;
+	    Properties connectionProps = new Properties();
+	    connectionProps.put("user", "root");
+	    connectionProps.put("password", "death2all");
+
+	    conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/", connectionProps);
+	    System.out.println("Connected to database");
+	    return conn;
 	}
 	
 	/**

@@ -16,6 +16,16 @@ class Player
 	{
 		setTotalLost(0);
 		setTotalWon(0);
+		setTotalDraws(0);
+		setEmailAddress("");
+	}
+	
+	public Player(String email, int totalWon, int totalLost, int totalDraws)
+	{
+		setEmailAddress(email);
+		setTotalLost(totalLost);
+		setTotalWon(totalWon);
+		setTotalDraws(totalDraws);
 	}
 	
 	public String getEmailAddress()
