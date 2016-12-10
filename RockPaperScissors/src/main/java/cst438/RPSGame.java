@@ -2,6 +2,7 @@ package cst438;
 
 import java.io.IOException;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 import java.util.Random;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
 
 /**
  * Servlet implementation class RPSGame
@@ -49,8 +51,24 @@ public class RPSGame extends HttpServlet {
 		
 		if (player == null)
 		{
-			player = new Player();
+			
 			email = request.getParameter("email");
+			Connection dbConn;
+			try {
+				dbConn = getConnection();
+				if (checkForUser(dbConn, email))
+				{
+					// create new player with existing data
+				}
+				else
+				{
+					player = new Player();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			
 		}
 		session.setAttribute("player", player);
@@ -101,6 +119,32 @@ public class RPSGame extends HttpServlet {
 		
 	}
 	
+	public static boolean checkForUser(Connection con, String user) throws SQLException
+	{
+		Statement stmt = null;
+		String query = "select top 1 player.email from player where player.email =" + user;
+		String userName = null;
+		try {
+			stmt = (Statement) con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			//while (rs.next())
+			//{
+				userName = rs.getString("email");
+			//}
+		} catch (SQLException e) {
+			System.out.println(e);
+		} finally {
+			if (stmt != null) {
+				stmt.close();
+			}
+		}
+		System.out.println(userName);
+		if (userName.equals(user))
+		{
+			return true;
+		}
+		return false;
+	}
 	
 	public Connection getConnection() throws SQLException {
 
