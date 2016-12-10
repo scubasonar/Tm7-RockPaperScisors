@@ -151,7 +151,7 @@ public class RPSGame extends HttpServlet {
 	    Connection conn = null;
 	    Properties connectionProps = new Properties();
 	    connectionProps.put("user", "root");
-	    connectionProps.put("password", "death2all");
+	    connectionProps.put("password", "");
 
 	    conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/", connectionProps);
 	    System.out.println("Connected to database");
