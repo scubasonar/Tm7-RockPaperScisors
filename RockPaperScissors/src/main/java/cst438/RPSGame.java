@@ -202,7 +202,7 @@ public class RPSGame extends HttpServlet {
 			Class.forName("com.mysql.jdbc.Driver");
 			String dbURL = "jdbc:mysql://localhost:3306/world";
 			String username = "root";
-			String password = "";
+			String password = "ZCny74Gcr1-2";
 			conn = DriverManager.getConnection(dbURL, username, password);
 			System.out.println("Connected to database");
 
