@@ -75,8 +75,6 @@ public class RPSGame extends HttpServlet {
 		request.setAttribute("totalWon", player.getTotalWon());
 		request.setAttribute("totalLost", player.getTotalLost());
 		request.setAttribute("totalDraw", player.getTotalDraws());
-		// TODO: remove the below line before submitting
-		request.setAttribute("email", email);
 		
 		String value = request.getParameter("value");
 		if (value != null)
