@@ -143,7 +143,10 @@ public class RPSGame extends HttpServlet {
 		
 		if (userName == null)
 		{
-			return new Player();
+			userName = user;
+			wins = 0;
+			losses = 0;
+			draws = 0;
 		}
 		
 		return new Player(userName, wins, losses, draws);

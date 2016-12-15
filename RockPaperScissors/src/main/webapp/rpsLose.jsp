@@ -39,6 +39,9 @@
       <form method="post" action="RPSGame">
          <button type="submit" value="Next" name="next" class="btn btn-default">Next Round</button>
       </form>
+      <form method="post" action="RPSGame">
+         <button type="submit" value="newGame" name="newGame" class="btn btn-default">New Game</button>
+      </form>
    </div>
    <div class="row">
       <h2>Session Stats</h2>
