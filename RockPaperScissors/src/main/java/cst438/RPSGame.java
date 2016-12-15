@@ -87,6 +87,14 @@ public class RPSGame extends HttpServlet {
 			request.setAttribute("player", value);
 
 			turnResult = playTurn(value, computerSelection, player);
+			Connection dbConn;
+			try {
+				dbConn = getConnection();
+				saveUser(dbConn, player);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			
 			if (turnResult == 0)
@@ -139,6 +147,50 @@ public class RPSGame extends HttpServlet {
 		}
 		
 		return new Player(userName, wins, losses, draws);
+	}
+	
+	public static void saveUser(Connection con, Player player) throws SQLException
+	{
+		if (player == null || con == null)
+		{
+			return;
+		}
+		
+	
+		String userName = player.getEmailAddress();
+		int wins = player.getTotalWon();
+		int losses = player.getTotalLost();
+		int draws = player.getTotalDraws();
+		
+		Statement stmt = null;
+		String queryUpdate = "UPDATE player SET " +
+						"wins = '" + wins + "', " +
+						"losses = '" + losses + "', " +
+						"draws = '" + draws + "' " +
+						"WHERE email = '" + userName + "'";
+		
+		String queryInsert = "INSERT INTO player (email, wins, losses, draws) " +
+						"VALUES ('" + userName + "', " +
+						"'" + wins + "', " +
+						"'" + losses + "', " +
+						"'" + draws + "')";
+		
+		
+		try {
+			stmt = con.createStatement();
+			int rowCount = stmt.executeUpdate(queryUpdate);
+			
+			if (rowCount == 0)
+			{
+				stmt.executeUpdate(queryInsert);
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+		} finally {
+			if (stmt != null) {
+				stmt.close();
+			}
+		}
 	}
 	
 	public Connection getConnection() {
