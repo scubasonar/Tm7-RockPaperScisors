@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.Properties;
 import java.util.Random;
 
@@ -13,8 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
 
 /**
  * Servlet implementation class RPSGame
@@ -51,25 +51,15 @@ public class RPSGame extends HttpServlet {
 		
 		if (player == null)
 		{
-			
 			email = request.getParameter("email");
 			Connection dbConn;
 			try {
 				dbConn = getConnection();
-				if (checkForUser(dbConn, email))
-				{
-					// create new player with existing data
-				}
-				else
-				{
-					player = new Player();
-				}
+				player = createUser(dbConn, email);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			
-			
+			}	
 		}
 		session.setAttribute("player", player);
 		
@@ -119,18 +109,22 @@ public class RPSGame extends HttpServlet {
 		
 	}
 	
-	public static boolean checkForUser(Connection con, String user) throws SQLException
+	public static Player createUser(Connection con, String user) throws SQLException
 	{
 		Statement stmt = null;
-		String query = "select top 1 player.email from player where player.email =" + user;
+		String query = "select * from player where email = '" + user + "'";
 		String userName = null;
+		int wins = 0, losses = 0, draws = 0;
 		try {
-			stmt = (Statement) con.createStatement();
+			stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
-			//while (rs.next())
-			//{
+			while (rs.next())
+			{
 				userName = rs.getString("email");
-			//}
+				wins = rs.getInt("wins");
+				losses = rs.getInt("losses");
+				draws = rs.getInt("draws");
+			}
 		} catch (SQLException e) {
 			System.out.println(e);
 		} finally {
@@ -138,24 +132,33 @@ public class RPSGame extends HttpServlet {
 				stmt.close();
 			}
 		}
-		System.out.println(userName);
-		if (userName.equals(user))
+		
+		if (userName == null)
 		{
-			return true;
+			return new Player();
 		}
-		return false;
+		
+		return new Player(userName, wins, losses, draws);
 	}
 	
-	public Connection getConnection() throws SQLException {
+	public Connection getConnection() {
+		Connection conn = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String dbURL = "jdbc:mysql://localhost:3306/world";
+			String username = "root";
+			String password = "";
+			conn = DriverManager.getConnection(dbURL, username, password);
+			System.out.println("Connected to database");
 
-	    Connection conn = null;
-	    Properties connectionProps = new Properties();
-	    connectionProps.put("user", "root");
-	    connectionProps.put("password", "");
-
-	    conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/", connectionProps);
-	    System.out.println("Connected to database");
-	    return conn;
+			} catch (SQLException e) {
+				for (Throwable t : e) {
+					t.printStackTrace();
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		return conn;
 	}
 	
 	/**
