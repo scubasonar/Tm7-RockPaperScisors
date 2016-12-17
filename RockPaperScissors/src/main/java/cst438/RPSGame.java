@@ -55,9 +55,18 @@ public class RPSGame extends HttpServlet {
 			Connection dbConn;
 			try {
 				dbConn = getConnection();
-				player = createUser(dbConn, email);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				if(dbConn != null)
+				{
+					player = createUser(dbConn, email);
+				}
+				else
+					{
+					System.out.println("Error: Could not connect to database to create a new user.");
+					player = new Player();
+					}
+					
+				}
+			catch (SQLException e) {				
 				e.printStackTrace();
 			}	
 		}
