@@ -16,7 +16,7 @@
          <h1 class="text-center">Welcome to Rock, Paper, Scissors!</h1>
          <h2 class="text-center">Start a new game below.</h2>
          
-         <form method="post" action="RPSGame">
+         <form method="post" action="RPSServlet">
             <div class="form-group">
                <label for="emailInput">Email Address</label>
                <input type="email" class="form-control" id="emailInput" name="email" placeholder="enter your email" required>

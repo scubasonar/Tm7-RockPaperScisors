@@ -15,19 +15,19 @@
    <div class="row">
       <div class="col-md-4">
          <img class="img-responsive" src="images/rock_01.png">
-         <form method="post" action="RPSGame">
+         <form method="post" action="RPSServlet">
          <button type="submit" value="Rock" name="value" class="btn btn-default">Rock</button>
          </form>
       </div>
       <div class="col-md-4">
          <img class="img-responsive" src="images/paper_01.png">
-         <form method="post" action="RPSGame">
+         <form method="post" action="RPSServlet">
          <button type="submit" value="Paper" name="value" class="btn btn-default">Paper</button>
          </form>
       </div>
       <div class="col-md-4">
          <img class="img-responsive" src="images/scissors_01.png">
-         <form method="post" action="RPSGame">
+         <form method="post" action="RPSServlet">
          <button type="submit" value="Scissors" name="value" class="btn btn-default">Scissors</button>
          </form>
       </div>

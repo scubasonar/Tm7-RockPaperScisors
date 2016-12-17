@@ -35,10 +35,10 @@
       </div>
    </div>
    <div class="row">
-      <form method="post" action="RPSGame">
+      <form method="post" action="RPSServlet">
          <button type="submit" value="Next" name="next" class="btn btn-default">Next Round</button>
       </form>
-      <form method="post" action="RPSGame">
+      <form method="post" action="RPSServlet">
          <button type="submit" value="newGame" name="newGame" class="btn btn-default">New Game</button>
       </form>
    </div>

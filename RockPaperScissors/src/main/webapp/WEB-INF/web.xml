@@ -5,13 +5,13 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
-  	<servlet-name>RPSGame</servlet-name>
-  	<display-name>RPSGame</display-name>
+  	<servlet-name>RPSServlet</servlet-name>
+  	<display-name>RPSServlet</display-name>
   	<description></description>
-  	<servlet-class>cst438.RPSGame</servlet-class>
+  	<servlet-class>cst438.RPSServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>RPSGame</servlet-name>
-  	<url-pattern>/RPSGame</url-pattern>
+  	<servlet-name>RPSServlet</servlet-name>
+  	<url-pattern>/RPSServlet</url-pattern>
   </servlet-mapping>
 </web-app>
